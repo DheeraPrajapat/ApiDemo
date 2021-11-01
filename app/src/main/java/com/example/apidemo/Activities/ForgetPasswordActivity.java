@@ -1,7 +1,8 @@
-package com.example.apidemo;
+package com.example.apidemo.Activities;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.apidemo.Package.ApiClient;
+import com.example.apidemo.R;
 import com.example.apidemo.Service.UserService;
 import com.example.apidemo.SignUpPojo.Model;
 
@@ -45,7 +47,9 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     alertDialog.show();
                     alertDialog.setMessage("Please check the your email / spam box.");
-                    alertDialog.setPositiveButton("Ok", (dialog, which) -> Toast.makeText(ForgetPasswordActivity.this, "Thank you..", Toast.LENGTH_SHORT).show());
+                    alertDialog.setPositiveButton("Ok", (dialog, which) ->
+                            startActivity(new Intent(ForgetPasswordActivity.this,SignInActivity.class))
+                            );
                 }
             }
             @Override
