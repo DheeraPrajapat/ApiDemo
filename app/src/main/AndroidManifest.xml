@@ -13,19 +13,22 @@
         android:theme="@style/Theme.ApiDemo"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ForgetPasswordActivity"
+            android:name=".Activities.ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".SignInActivity"
-            android:exported="false" />
+            android:name=".Activities.ForgetPasswordActivity"
+            android:exported="true" />
         <activity
-            android:name=".MainActivity"
-            android:exported="false" />
+            android:name=".Activities.SignInActivity"
+            android:exported="true" />
         <activity
-            android:name=".SignUpActivity"
-            android:exported="false" />
+            android:name=".Activities.MainActivity"
+            android:exported="true" />
         <activity
-            android:name=".WelcomeActivity"
+            android:name=".Activities.SignUpActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activities.WelcomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
