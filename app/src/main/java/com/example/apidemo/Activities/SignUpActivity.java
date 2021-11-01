@@ -1,4 +1,4 @@
-package com.example.apidemo;
+package com.example.apidemo.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.apidemo.Package.ApiClient;
+import com.example.apidemo.R;
 import com.example.apidemo.Service.UserService;
 import com.example.apidemo.SignUpPojo.Model;
 
@@ -20,7 +21,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SignUpActivity extends AppCompatActivity {
-    EditText editTextEmail,editTextDeviceType,editTextCPassword;
+    EditText editTextEmail,editTextDeviceType,editTextCPassword,editTextAdress;
     Button buttonSignUp;
     ProgressDialog progressDialog;
     UserService userService;
@@ -36,7 +37,10 @@ public class SignUpActivity extends AppCompatActivity {
                 ||editTextDeviceType.getText().equals("")){
                Toast.makeText(SignUpActivity.this, "Fill the all field!", Toast.LENGTH_SHORT).show();
            }else {
-               registerUser();
+               String email=editTextEmail.getText().toString();
+               String address=editTextAdress.getText().toString();
+               String password=editTextCPassword.getText().toString();
+              registerUser(email,address,password);
            }
         });
     }
@@ -44,6 +48,7 @@ public class SignUpActivity extends AppCompatActivity {
     private void initViews() {
         editTextEmail=findViewById(R.id.et_Email);
         editTextDeviceType=findViewById(R.id.et_Type);
+        editTextAdress=findViewById(R.id.et_Adress);
         editTextCPassword=findViewById(R.id.et_CTPass);
         editTextDeviceType.setText("Android");
         alertDialog=new AlertDialog.Builder(this);
@@ -52,16 +57,16 @@ public class SignUpActivity extends AppCompatActivity {
         userService = ApiClient.getClient().create(UserService.class);
     }
 
-    public void registerUser(){
+    public void registerUser(String email, String address, String password){
         progressDialog.show();
-        userService.callbackRegister(editTextEmail.getText().toString(),editTextCPassword.getText().toString()).enqueue(new Callback<Model>() {
+        userService.callbackRegister(email,password,address).enqueue(new Callback<Model>() {
             @Override
             public void onResponse(Call<Model> call, Response<Model> response) {
                 if(response.isSuccessful()){
                     Model model = response.body();
                     Toast.makeText(SignUpActivity.this, "Registration successfully..."+ model.getBody().getEmail(), Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
-                    startActivity(new Intent(SignUpActivity.this,SignInActivity.class));
+                    startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
                     finish();
                 }else {
                     progressDialog.dismiss();

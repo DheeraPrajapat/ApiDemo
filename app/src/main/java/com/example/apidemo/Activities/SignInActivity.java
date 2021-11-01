@@ -1,4 +1,4 @@
-package com.example.apidemo;
+package com.example.apidemo.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,9 +8,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.apidemo.Package.ApiClient;
+import com.example.apidemo.R;
 import com.example.apidemo.Service.UserService;
 import com.example.apidemo.SignUpPojo.Model;
 
@@ -23,6 +25,7 @@ public class SignInActivity extends AppCompatActivity {
     EditText edit1,edit2;
     ProgressDialog progressDialog;
     UserService userService;
+    TextView forgetPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +42,10 @@ public class SignInActivity extends AppCompatActivity {
             }
         });
         btn2.setOnClickListener(v->{
-            startActivity(new Intent(SignInActivity.this,SignUpActivity.class));
+            startActivity(new Intent(SignInActivity.this, SignUpActivity.class));
+        });
+        forgetPassword.setOnClickListener(v->{
+            startActivity(new Intent(SignInActivity.this,ForgetPasswordActivity.class));
         });
     }
 
@@ -48,6 +54,7 @@ public class SignInActivity extends AppCompatActivity {
         btn2=findViewById(R.id.loginSingUpButton);
         edit1=findViewById(R.id.loginEmail);
         edit2=findViewById(R.id.loginPassword);
+        forgetPassword=findViewById(R.id.forgetPasswordButton);
         progressDialog=new ProgressDialog(this);
         SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         String status = sh.getString("token", "");
@@ -55,6 +62,7 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     public void loginUser(String email,String password){
+        progressDialog.show();
         userService.callbackLogin(email,password).enqueue(new Callback<Model>() {
             @Override
             public void onResponse(Call<Model> call, Response<Model> response) {
@@ -66,17 +74,23 @@ public class SignInActivity extends AppCompatActivity {
                     String status="login";
                     myEdit.putString("status", status);
                     myEdit.putString("token",model.getBody().token);
+                    myEdit.putString("id", String.valueOf(model.getBody()._id));
                     myEdit.apply();
                     progressDialog.dismiss();
-                    startActivity(new Intent(SignInActivity.this,SignInActivity.class));
+                    Intent intent=new Intent(SignInActivity.this, MainActivity.class);
+                    intent.putExtra("id",model.getBody()._id);
+                    intent.putExtra("token",model.getBody().token);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
                     finish();
                 }else {
                     progressDialog.dismiss();
-                    Toast.makeText(SignInActivity.this, "Registration successfully...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignInActivity.this,"Error occured....", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
             public void onFailure(Call<Model> call, Throwable t) {
+                progressDialog.dismiss();
                 Toast.makeText(SignInActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
