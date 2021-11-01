@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.ProfileActivity">
+
+    <ImageView
+        android:id="@+id/profileImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:src="@mipmap/ic_launcher" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profileImage"
+        android:layout_marginLeft="60dp"
+        android:id="@+id/linear"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:textColorHint="@color/black"
+            android:id="@+id/profileEmail"
+            android:background="@drawable/edittext_shape"
+            android:padding="8dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Device Type"
+            android:layout_marginTop="10dp"
+            android:textColorHint="@color/black"
+            android:id="@+id/profileDType"
+            android:background="@drawable/edittext_shape"
+            android:padding="8dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:hint="Region"
+            android:textColorHint="@color/black"
+            android:id="@+id/profileRegion"
+            android:background="@drawable/edittext_shape"
+            android:padding="8dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="User id"
+            android:layout_marginTop="10dp"
+            android:textColorHint="@color/black"
+            android:id="@+id/profileUserId"
+            android:background="@drawable/edittext_shape"
+            android:padding="8dp"/>
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_marginTop="50dp"
+        android:layout_below="@id/linear"
+        android:layout_height="wrap_content"
+        android:text="Edit Profile"
+        android:id="@+id/editProfile"
+        android:textAllCaps="false"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="60dp"
+        android:background="@drawable/button_shape"
+        app:backgroundTint="@color/black"/>
+
+    <Button
+        android:id="@+id/updateProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linear"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/button_shape"
+        android:text="Update Profile"
+        android:textAllCaps="false"
+        app:backgroundTint="@color/black" />
+
+</RelativeLayout>
