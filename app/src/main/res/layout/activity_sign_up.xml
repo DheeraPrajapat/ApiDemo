@@ -28,15 +28,15 @@
         android:id="@+id/et_Email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/edittext_shape"
-        android:padding="10dp"
         android:layout_below="@id/signUpLogo"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="19dp"
+        android:background="@drawable/edittext_shape"
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"
+        android:padding="10dp"
         android:textColor="@color/black" />
 
     <EditText
