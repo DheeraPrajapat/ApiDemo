@@ -12,45 +12,82 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:src="@mipmap/ic_launcher" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/profileImage"
-        android:layout_marginLeft="60dp"
+        android:layout_marginLeft="40dp"
         android:id="@+id/linear"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
         android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/black"
+                android:paddingEnd="90sp"
+                android:hint="Full name"
+                android:id="@+id/fullName"
+                android:background="@drawable/edittext_shape"
+                android:padding="8dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/black"
+                android:hint="Nick name"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/nickName"
+                android:background="@drawable/edittext_shape"
+                android:padding="8dp"/>
+
+        </LinearLayout>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
             android:textColorHint="@color/black"
+            android:layout_marginTop="10dp"
             android:id="@+id/profileEmail"
             android:background="@drawable/edittext_shape"
             android:padding="8dp"/>
-        <EditText
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Device Type"
-            android:layout_marginTop="10dp"
-            android:textColorHint="@color/black"
-            android:id="@+id/profileDType"
-            android:background="@drawable/edittext_shape"
-            android:padding="8dp"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_height="wrap_content"
-            android:hint="Region"
-            android:textColorHint="@color/black"
-            android:id="@+id/profileRegion"
-            android:background="@drawable/edittext_shape"
-            android:padding="8dp"/>
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Device Type"
+                android:paddingEnd="77sp"
+                android:layout_marginTop="10dp"
+                android:textColorHint="@color/black"
+                android:id="@+id/profileDType"
+                android:background="@drawable/edittext_shape"
+                android:padding="8dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"
+                android:hint="Region"
+                android:layout_marginLeft="10dp"
+                android:paddingEnd="50sp"
+                android:textColorHint="@color/black"
+                android:id="@+id/profileRegion"
+                android:background="@drawable/edittext_shape"
+                android:padding="8dp"/>
+
+        </LinearLayout>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
