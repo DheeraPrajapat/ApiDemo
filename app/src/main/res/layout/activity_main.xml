@@ -6,13 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".Activities.MainActivity">
 
-   <TextView
+   <EditText
+       android:id="@+id/searchName"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="5dp"
+       android:layout_marginRight="100dp"
+       android:background="@drawable/edittext_shape"
+       android:hint="search the name!"
+       android:padding="8dp" />
+
+   <Button
+       android:id="@+id/searchMainButton"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
+       android:layout_alignParentEnd="true"
+       android:text="Search" />
+   <androidx.recyclerview.widget.RecyclerView
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:layout_below="@id/searchName"
+       android:layout_marginTop="10dp"
        android:textSize="25dp"
        android:textColor="@color/black"
        android:textStyle="bold"
        android:layout_centerInParent="true"
-       android:text="Hello user"/>
+       android:id="@+id/searchRecycler"/>
 
 </RelativeLayout>

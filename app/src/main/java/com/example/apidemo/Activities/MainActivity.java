@@ -3,6 +3,8 @@ package com.example.apidemo.Activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,29 +12,80 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.apidemo.Adapter.UserItemAdapter;
+import com.example.apidemo.Adapter.UserItemClass;
 import com.example.apidemo.Package.ApiClient;
 import com.example.apidemo.R;
+import com.example.apidemo.SearchUser.SearchBody;
+import com.example.apidemo.SearchUser.SearchModel;
 import com.example.apidemo.Service.UserService;
+import com.example.apidemo.SignUpPojo.GetProfileBody;
+import com.example.apidemo.SignUpPojo.GetProfileModel;
 import com.example.apidemo.SignUpPojo.LogoutModel;
+import com.example.apidemo.SignUpPojo.Model;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
-    Button logButton;
+    Button serachButton;
     UserService userService;
     AlertDialog.Builder alert;
     String userId="";
+    RecyclerView recyclerView;
     String token="";
+    ArrayList<UserItemClass> arrayList;
+    EditText searchEditor;
+    UserItemAdapter userItemAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
+        serachButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name=searchEditor.getText().toString();
+                if(name.isEmpty()){
+                    Toast.makeText(MainActivity.this, "Enter the name...", Toast.LENGTH_SHORT).show();
+                }
+                setTheSearchItem(name);
+            }
+        });
+    }
+
+    private void setTheSearchItem(String name)
+    {
+        userService.callbackGetUserByName(name).enqueue(new Callback<SearchModel>() {
+            @Override
+            public void onResponse(Call<SearchModel> call, Response<SearchModel> response) {
+                if(response.isSuccessful()){
+                    SearchModel searchModel=response.body();
+//                    arrayList.add(new UserItemClass(searchModel.body.g().toString(),getProfileBody.body.getDevice_type()));
+//                    RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(MainActivity.this);
+//                    recyclerView.setLayoutManager(layoutManager);
+//                    recyclerView.setAdapter(searchModel.getBody());
+//                    userItemAdapter=new UserItemAdapter(searchModel.getBody(),MainActivity.this);
+//                    recyclerView.setAdapter(userItemAdapter);
+                    UserItemAdapter adapter = new UserItemAdapter(searchModel.getBody(),MainActivity.this);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+                    recyclerView.setAdapter(adapter);
+                }
+
+            }
+            @Override
+            public void onFailure(Call<SearchModel> call, Throwable t) {
+                Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void logoutUserId() {
@@ -61,25 +114,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     private void initViews() {
         SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         userId = sh.getString("id", "");
         token=sh.getString("token","");
-
-        logButton= findViewById(R.id.loginButton);
+        serachButton= findViewById(R.id.searchMainButton);
+        searchEditor=findViewById(R.id.searchName);
+        recyclerView=findViewById(R.id.searchRecycler);
         alert=new AlertDialog.Builder(this);
-
         userService= ApiClient.getClientTokn(token).create(UserService.class);
 
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.user_profile,menu);
         return super.onCreateOptionsMenu(menu);
     }
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){

@@ -1,5 +1,6 @@
 package com.example.apidemo.Service;
 
+import com.example.apidemo.SearchUser.SearchModel;
 import com.example.apidemo.SignUpPojo.ChangePasswordModel;
 import com.example.apidemo.SignUpPojo.GetProfileModel;
 import com.example.apidemo.SignUpPojo.LogoutModel;
@@ -48,4 +49,8 @@ public interface UserService
     @FormUrlEncoded
     @POST("check-username")
     Call<Model> callbackCheckUsername(@Field("username") String username);
+
+    @FormUrlEncoded
+    @POST("search-user")
+    Call<SearchModel> callbackGetUserByName(@Field("text") String name);
 }
