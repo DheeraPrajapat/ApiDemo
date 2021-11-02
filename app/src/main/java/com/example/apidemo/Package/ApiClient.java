@@ -62,19 +62,16 @@ public class ApiClient
                 .connectTimeout(120, TimeUnit.SECONDS)
                 .readTimeout(120, TimeUnit.SECONDS)
                 .writeTimeout(120, TimeUnit.SECONDS);
-        client.addInterceptor(new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Request request = chain.request();
+        client.addInterceptor(chain -> {
+            Request request = chain.request();
 
-                request = request
-                        .newBuilder()
-                        .addHeader("api_key","sakfslf1232mnsfdKLH3423jhvdknvdk")
-                        .addHeader("token",status)
-                        .build();
+            request = request
+                    .newBuilder()
+                    .addHeader("api_key","sakfslf1232mnsfdKLH3423jhvdknvdk")
+                    .addHeader("token",status)
+                    .build();
 
-                return chain.proceed(request);
-            }
+            return chain.proceed(request);
         });
 
         Gson gson = new GsonBuilder()

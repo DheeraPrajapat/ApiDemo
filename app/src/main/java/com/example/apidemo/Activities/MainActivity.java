@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     Button logButton;
     UserService userService;
     AlertDialog.Builder alert;
-    int userId=0;
+    String userId="";
     String token="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +36,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void logoutUserId() {
-        userService.callLogoutUser(String.valueOf(userId)).enqueue(new Callback<LogoutModel>() {
+        userService.callLogoutUser(userId).enqueue(new Callback<LogoutModel>() {
             @Override
             public void onResponse(Call<LogoutModel> call, Response<LogoutModel> response) {
                 if(response.isSuccessful()){
+                    SharedPreferences sh=getSharedPreferences("MySharedPref",MODE_PRIVATE);
+                    SharedPreferences.Editor s=sh.edit();
+                    s.putString("status","");
                     startActivity(new Intent(MainActivity.this, SignInActivity.class)
                         .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
                 }else{
@@ -59,12 +63,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-//        SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
-//        String status = sh.getString("status", "");
+        SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        userId = sh.getString("id", "");
+        token=sh.getString("token","");
+
         logButton= findViewById(R.id.loginButton);
         alert=new AlertDialog.Builder(this);
-        userId=getIntent().getIntExtra("id",0);
-        token=getIntent().getStringExtra("token");
+
         userService= ApiClient.getClientTokn(token).create(UserService.class);
 
     }
@@ -84,6 +89,10 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.Profile:
                 startActivity(new Intent(MainActivity.this,ProfileActivity.class));
+                return true;
+
+            case R.id.checkUsername:
+                startActivity(new Intent(MainActivity.this,CheckUsername.class));
                 return true;
         }
         return false;

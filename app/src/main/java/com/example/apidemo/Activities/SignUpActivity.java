@@ -7,6 +7,8 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -31,6 +33,7 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         initViews();
+
         buttonSignUp.setOnClickListener(v->{
            if(editTextEmail.getText().equals("")
                 ||editTextCPassword.getText().equals("")
@@ -59,33 +62,49 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void registerUser(String email, String address, String password){
         progressDialog.show();
-        userService.callbackRegister(email,password,address).enqueue(new Callback<Model>() {
+
+        userService.callbackCheckEmail(email).enqueue(new Callback<Model>() {
             @Override
             public void onResponse(Call<Model> call, Response<Model> response) {
                 if(response.isSuccessful()){
-                    Model model = response.body();
-                    Toast.makeText(SignUpActivity.this, "Registration successfully..."+ model.getBody().getEmail(), Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
-                    startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
-                    finish();
+                    userService.callbackRegister(email,password,address).enqueue(new Callback<Model>() {
+                        @Override
+                        public void onResponse(Call<Model> call, Response<Model> response) {
+                            if(response.isSuccessful()){
+                                Model model = response.body();
+                                Toast.makeText(SignUpActivity.this, "Registration successfully..."+ model.getBody().getEmail(), Toast.LENGTH_SHORT).show();
+                                progressDialog.dismiss();
+                                startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
+                                finish();
+                            }else {
+                                progressDialog.dismiss();
+                                Toast.makeText(SignUpActivity.this, response.message(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Model> call, Throwable t) {
+                            progressDialog.dismiss();
+                            alertDialog.setMessage(t.getMessage());
+                            alertDialog.show();
+                            alertDialog.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Toast.makeText(SignUpActivity.this,"Okey",Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    });
                 }else {
                     progressDialog.dismiss();
-                    Toast.makeText(SignUpActivity.this, "Registration successfully...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, "Email already exists....", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Model> call, Throwable t) {
-                alertDialog.setMessage(t.getMessage());
-                alertDialog.show();
-                alertDialog.setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(SignUpActivity.this,"Okey",Toast.LENGTH_SHORT).show();
-                    }
-                });
+                Toast.makeText(SignUpActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 }
