@@ -50,15 +50,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
-        serachButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String name=searchEditor.getText().toString();
-                if(name.isEmpty()){
-                    Toast.makeText(MainActivity.this, "Enter the name...", Toast.LENGTH_SHORT).show();
-                }
-                setTheSearchItem(name);
+        serachButton.setOnClickListener(v -> {
+            String name=searchEditor.getText().toString();
+            if(name.isEmpty()){
+                Toast.makeText(MainActivity.this, "Enter the name...", Toast.LENGTH_SHORT).show();
             }
+            setTheSearchItem(name);
         });
     }
 
@@ -69,12 +66,6 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<SearchModel> call, Response<SearchModel> response) {
                 if(response.isSuccessful()){
                     SearchModel searchModel=response.body();
-//                    arrayList.add(new UserItemClass(searchModel.body.g().toString(),getProfileBody.body.getDevice_type()));
-//                    RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(MainActivity.this);
-//                    recyclerView.setLayoutManager(layoutManager);
-//                    recyclerView.setAdapter(searchModel.getBody());
-//                    userItemAdapter=new UserItemAdapter(searchModel.getBody(),MainActivity.this);
-//                    recyclerView.setAdapter(userItemAdapter);
                     UserItemAdapter adapter = new UserItemAdapter(searchModel.getBody(),MainActivity.this);
                     recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
                     recyclerView.setAdapter(adapter);
@@ -105,12 +96,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<LogoutModel> call, Throwable t) {
                 alert.setMessage(t.getMessage());
-                alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(MainActivity.this, "Thank you...", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                alert.setPositiveButton("Ok", (dialog, which) -> Toast.makeText(MainActivity.this, "Thank you...", Toast.LENGTH_SHORT).show());
             }
         });
     }

@@ -1,6 +1,7 @@
 package com.example.apidemo.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,17 @@ public class UserItemAdapter extends RecyclerView.Adapter<UserItemAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.dType.setText(arrayList.get(position).getDevice_type());
         holder.name.setText(arrayList.get(position).getEmail());
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent=new Intent(context,GetUserInformation.class);
+//                intent.putExtra("name",arrayList.get(position).getFull_name().toString());
+//                intent.putExtra("email",arrayList.get(position).getEmail().toString());
+//                intent.putExtra("address",arrayList.get(position).getAddress().toString());
+//                intent.putExtra("Device Type",arrayList.get(position).getDevice_type().toString());
+//                context.startActivity(intent);
+//            }
+//        });
     }
 
     @Override
