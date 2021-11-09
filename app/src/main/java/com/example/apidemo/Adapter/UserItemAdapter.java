@@ -1,13 +1,18 @@
 package com.example.apidemo.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.apidemo.Activities.MainActivity;
@@ -25,7 +30,6 @@ public class UserItemAdapter extends RecyclerView.Adapter<UserItemAdapter.ViewHo
 {
     List<SearchBody> arrayList;
     Context context;
-
     public UserItemAdapter(List<SearchBody> body, MainActivity mainActivity) {
         this.arrayList = body;
         this.context = mainActivity;
@@ -40,20 +44,28 @@ public class UserItemAdapter extends RecyclerView.Adapter<UserItemAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.dType.setText(arrayList.get(position).getDevice_type());
         holder.name.setText(arrayList.get(position).getEmail());
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent=new Intent(context,GetUserInformation.class);
-//                intent.putExtra("name",arrayList.get(position).getFull_name().toString());
-//                intent.putExtra("email",arrayList.get(position).getEmail().toString());
-//                intent.putExtra("address",arrayList.get(position).getAddress().toString());
-//                intent.putExtra("Device Type",arrayList.get(position).getDevice_type().toString());
-//                context.startActivity(intent);
-//            }
-//        });
+        holder.itemView.setOnClickListener(v -> {
+            AlertDialog alert = new AlertDialog.Builder(context, R.style.verification_done).create();
+            View view=LayoutInflater.from(context).inflate(R.layout.user_item_info,null,false);
+            alert.setView(view);
+            alert.show();
+            alert.setCancelable(false);
+            TextView name,dType,email,address;
+            Button closeAlertBg;
+            closeAlertBg=view.findViewById(R.id.close_alert_box);
+            name=view.findViewById(R.id.user_item_fullname);
+            dType=view.findViewById(R.id.user_item_device);
+            email=view.findViewById(R.id.user_item_email);
+            address=view.findViewById(R.id.user_item_addess);
+            name.setText(arrayList.get(position).getFull_name());
+            dType.setText(arrayList.get(position).getDevice_type());
+            email.setText(arrayList.get(position).getEmail());
+            address.setText(arrayList.get(position).getAddress());
+            closeAlertBg.setOnClickListener(v1 -> alert.dismiss());
+        });
     }
 
     @Override

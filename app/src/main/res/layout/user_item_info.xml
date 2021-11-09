@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
     android:layout_height="wrap_content">
 
     <RelativeLayout
@@ -10,11 +11,12 @@
         android:layout_height="wrap_content">
 
         <ImageView
+            android:id="@+id/userInfoImage"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:id="@+id/userInfoImage"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_psychology" />
 
         <TextView
             android:id="@+id/user_item_fullname"
@@ -22,16 +24,18 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/userInfoImage"
             android:layout_centerHorizontal="true"
-            android:textStyle="bold"
+            android:textColor="@color/black"
             android:layout_marginTop="10dp"
             android:text="@string/full_name"
-            android:textSize="13sp" />
+            android:textSize="13sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/email"
             android:textSize="13sp"
+            android:textColor="@color/black"
             android:id="@+id/user_item_email"
             android:layout_below="@id/user_item_fullname"
             android:layout_centerHorizontal="true"
@@ -43,18 +47,32 @@
             android:text="@string/device_type"
             android:id="@+id/user_item_device"
             android:textSize="13sp"
+            android:textColor="@color/black"
             android:layout_below="@id/user_item_email"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"/>
 
         <TextView
+            android:id="@+id/user_item_addess"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="13sp"
-            android:id="@+id/user_item_addess"
-            android:text="@string/address"
             android:layout_below="@id/user_item_device"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/address"
+            android:textColor="@color/black"
+            android:textSize="13sp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/user_item_addess"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/button_shape"
+            android:text="Close"
+            android:id="@+id/close_alert_box"/>
     </RelativeLayout>
-</androidx.cardview.widget.CardView>
+</RelativeLayout>

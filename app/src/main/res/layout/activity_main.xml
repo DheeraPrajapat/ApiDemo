@@ -22,15 +22,16 @@
        android:layout_height="wrap_content"
        android:layout_alignParentEnd="true"
        android:text="Search" />
+
    <androidx.recyclerview.widget.RecyclerView
+       android:id="@+id/searchRecycler"
        android:layout_width="match_parent"
        android:layout_height="match_parent"
        android:layout_below="@id/searchName"
+       android:layout_centerHorizontal="true"
        android:layout_marginTop="10dp"
-       android:textSize="25dp"
        android:textColor="@color/black"
-       android:textStyle="bold"
-       android:layout_centerInParent="true"
-       android:id="@+id/searchRecycler"/>
+       android:textSize="25dp"
+       android:textStyle="bold" />
 
 </RelativeLayout>

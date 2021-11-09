@@ -48,7 +48,7 @@ public class SearchBody
         this.username = username;
     }
 
-    public Object getFull_name() {
+    public String getFull_name() {
         return full_name;
     }
 
