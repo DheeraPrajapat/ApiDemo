@@ -154,7 +154,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void ChangePassword()
     {
-        AlertDialog alertDialog=new AlertDialog.Builder(this).create();
+        AlertDialog alertDialog=new AlertDialog.Builder(this,R.style.verification_done).create();
         View view= LayoutInflater.from(this).inflate(R.layout.change_password,null,false);
         alertDialog.setView(view);
         alertDialog.show();
@@ -185,8 +185,8 @@ public class ProfileActivity extends AppCompatActivity {
                     Toast.makeText(ProfileActivity.this, "Error occured :- "+t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
-            cancelBtn.setOnClickListener(v1 -> alertDialog.dismiss());
         });
+        cancelBtn.setOnClickListener(v1 -> alertDialog.dismiss());
 
     }
 }

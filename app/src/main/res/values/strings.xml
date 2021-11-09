@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Todo List</string>
-    <string name="full_name">Full name</string>
-    <string name="email">Email</string>
-    <string name="device_type">Device Type</string>
-    <string name="address">Address</string>
+    <string name="app_name">ApiDemo</string>
+    <string name="full_name" translatable="false">Full name</string>
+    <string name="email" translatable="false">Email</string>
+    <string name="device_type" translatable="false">Device Type</string>
+    <string name="address" translatable="false">Address</string>
 </resources>

@@ -6,12 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".Activities.MainActivity">
 
+   <include
+       android:id="@+id/set_toolbar"
+       layout="@layout/main_toolbar" />
+
    <EditText
        android:id="@+id/searchName"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
+       android:layout_below="@id/set_toolbar"
+       android:layout_marginLeft="10dp"
        android:layout_marginTop="5dp"
-       android:layout_marginRight="100dp"
+       android:layout_marginRight="120dp"
+
+
        android:background="@drawable/edittext_shape"
        android:hint="search the name!"
        android:padding="8dp" />
@@ -19,7 +27,9 @@
    <Button
        android:id="@+id/searchMainButton"
        android:layout_width="wrap_content"
+       android:layout_marginRight="10dp"
        android:layout_height="wrap_content"
+       android:layout_below="@id/set_toolbar"
        android:layout_alignParentEnd="true"
        android:text="Search" />
 
@@ -27,11 +37,23 @@
        android:id="@+id/searchRecycler"
        android:layout_width="match_parent"
        android:layout_height="match_parent"
+       android:layout_marginRight="20dp"
        android:layout_below="@id/searchName"
        android:layout_centerHorizontal="true"
        android:layout_marginTop="10dp"
        android:textColor="@color/black"
        android:textSize="25dp"
        android:textStyle="bold" />
+
+   <com.google.android.material.floatingactionbutton.FloatingActionButton
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+         android:src="@drawable/ic_round_create_24"
+      app:backgroundTint="#DFD9D9"
+      android:id="@+id/createPost"
+      android:layout_alignParentEnd="true"
+      android:layout_alignParentBottom="true"
+      android:layout_marginRight="20dp"
+      android:layout_marginBottom="100dp"/>
 
 </RelativeLayout>
