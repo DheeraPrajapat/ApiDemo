@@ -1,19 +1,19 @@
 package com.example.apidemo.Service;
 
-import com.example.apidemo.SearchUser.SearchModel;
+import com.example.apidemo.PojoClasses.GetPost.GetAllPostModel;
+import com.example.apidemo.PojoClasses.SearchUser.SearchModel;
 import com.example.apidemo.SignUpPojo.ChangePasswordModel;
-import com.example.apidemo.SignUpPojo.GetProfileModel;
+import com.example.apidemo.PojoClasses.GetProfile.GetProfileModel;
+import com.example.apidemo.SignUpPojo.LikeModel;
 import com.example.apidemo.SignUpPojo.LogoutModel;
 import com.example.apidemo.SignUpPojo.Model;
-import com.example.apidemo.SignUpPojo.UserPostBody;
-import com.example.apidemo.SignUpPojo.UserPostModel;
+import com.example.apidemo.PojoClasses.CreatePost.UserPostModel;
 
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.PUT;
 
 public interface UserService
 {
@@ -60,4 +60,14 @@ public interface UserService
     @FormUrlEncoded
     @POST("create-feed")
     Call<UserPostModel> callbackCreatePost(@Field("user_id") String _id , @Field("text") String text);
+
+    @GET("get-feeds")
+    Call<GetAllPostModel> callbackGetAllPost();
+
+    @FormUrlEncoded
+    @POST("get-a-feed")
+    Call<GetAllPostModel> callbackGetSingleFeed(@Field("feed_id") Integer id);
+    @FormUrlEncoded
+    @POST("like")
+    Call<LikeModel> callbackLike(@Field("feed_id") int feed_id , @Field("user_id") int user_id , @Field("status") int status);
 }
