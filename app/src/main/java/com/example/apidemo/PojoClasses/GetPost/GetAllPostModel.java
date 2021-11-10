@@ -1,11 +1,15 @@
-package com.example.apidemo.SignUpPojo;
+package com.example.apidemo.PojoClasses.GetPost;
 
-public class UserPostModel
+import com.example.apidemo.PojoClasses.GetPost.GetAllPostBody;
+
+import java.util.List;
+
+public class GetAllPostModel
 {
     public int success;
     public int code;
     public String message;
-    public UserPostBody body;
+    public List<GetAllPostBody> body;
 
     public int getSuccess() {
         return success;
@@ -31,11 +35,11 @@ public class UserPostModel
         this.message = message;
     }
 
-    public UserPostBody getBody() {
+    public List<GetAllPostBody> getBody() {
         return body;
     }
 
-    public void setBody(UserPostBody body) {
+    public void setBody(List<GetAllPostBody> body) {
         this.body = body;
     }
 }

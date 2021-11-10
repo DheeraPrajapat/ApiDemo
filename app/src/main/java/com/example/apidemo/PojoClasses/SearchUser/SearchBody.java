@@ -1,4 +1,4 @@
-package com.example.apidemo.SearchUser;
+package com.example.apidemo.PojoClasses.SearchUser;
 
 import java.util.Date;
 

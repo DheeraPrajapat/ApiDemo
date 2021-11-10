@@ -2,35 +2,27 @@ package com.example.apidemo.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.apidemo.Activities.MainActivity;
+import com.example.apidemo.Activities.SearchUserActivity;
 import com.example.apidemo.R;
-import com.example.apidemo.SearchUser.SearchBody;
-import com.example.apidemo.SearchUser.SearchModel;
-import com.example.apidemo.SignUpPojo.GetProfileBody;
+import com.example.apidemo.PojoClasses.SearchUser.SearchBody;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Callback;
 
 public class UserItemAdapter extends RecyclerView.Adapter<UserItemAdapter.ViewHolder>
 {
     List<SearchBody> arrayList;
     Context context;
-    public UserItemAdapter(List<SearchBody> body, MainActivity mainActivity) {
+    public UserItemAdapter(List<SearchBody> body, SearchUserActivity mainActivity) {
         this.arrayList = body;
         this.context = mainActivity;
     }

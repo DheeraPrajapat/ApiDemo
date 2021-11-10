@@ -5,7 +5,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,8 +20,7 @@ import com.example.apidemo.Package.ApiClient;
 import com.example.apidemo.R;
 import com.example.apidemo.Service.UserService;
 import com.example.apidemo.SignUpPojo.ChangePasswordModel;
-import com.example.apidemo.SignUpPojo.GetProfileModel;
-import com.example.apidemo.SignUpPojo.Model;
+import com.example.apidemo.PojoClasses.GetProfile.GetProfileModel;
 
 import retrofit2.Call;
 import retrofit2.Callback;

@@ -1,4 +1,4 @@
-package com.example.apidemo.SignUpPojo;
+package com.example.apidemo.PojoClasses.CreatePost;
 
 import java.util.Date;
 

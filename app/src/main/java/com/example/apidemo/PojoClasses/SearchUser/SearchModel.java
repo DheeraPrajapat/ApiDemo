@@ -1,6 +1,7 @@
-package com.example.apidemo.SearchUser;
+package com.example.apidemo.PojoClasses.SearchUser;
 
-import java.util.Date;
+import com.example.apidemo.PojoClasses.SearchUser.SearchBody;
+
 import java.util.List;
 
 public class SearchModel

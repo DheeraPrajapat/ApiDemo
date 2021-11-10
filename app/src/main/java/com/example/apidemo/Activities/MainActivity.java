@@ -1,5 +1,6 @@
 package com.example.apidemo.Activities;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,7 +8,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
@@ -18,14 +18,15 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.apidemo.Adapter.UserItemAdapter;
+import com.example.apidemo.Adapter.UserPostAdapter;
 import com.example.apidemo.Package.ApiClient;
+import com.example.apidemo.PojoClasses.GetPost.GetAllPostModel;
 import com.example.apidemo.R;
-import com.example.apidemo.SearchUser.SearchModel;
 import com.example.apidemo.Service.UserService;
 import com.example.apidemo.SignUpPojo.LogoutModel;
-import com.example.apidemo.SignUpPojo.UserPostModel;
+import com.example.apidemo.PojoClasses.CreatePost.UserPostModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
 import retrofit2.Call;
@@ -33,49 +34,25 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
-    Button serachButton;
     UserService userService;
     AlertDialog.Builder alert;
     RecyclerView recyclerView;
     String token="",userId="";
     ProgressDialog progressDialog;
-    ImageView imageView;
+    ImageView imageView,searchIcon;
     FloatingActionButton fbBtn;
-    Toolbar toolbar;
-    EditText searchEditor;
+    Toolbar mainActivityToolbar,searchActivityToolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
-        serachButton.setOnClickListener(v -> {
-            String name = searchEditor.getText().toString();
-            if (name.isEmpty()) {
-                Toast.makeText(MainActivity.this, "Enter the name...", Toast.LENGTH_SHORT).show();
-            }
-            setTheSearchItem(name);
-        });
+        getAllFeeds();
         imageView.setOnClickListener(v-> setUpPopMenu());
         fbBtn.setOnClickListener(v->createPostAlertBox());
-
-    }
-    private void setTheSearchItem(String name)
-    {
-        userService.callbackGetUserByName(name).enqueue(new Callback<SearchModel>() {
-            @Override
-            public void onResponse(Call<SearchModel> call, Response<SearchModel> response) {
-                if(response.isSuccessful()){
-                    SearchModel searchModel=response.body();
-                    UserItemAdapter adapter = new UserItemAdapter(searchModel.getBody(),MainActivity.this);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-                    recyclerView.setAdapter(adapter);
-                }
-
-            }
-            @Override
-            public void onFailure(Call<SearchModel> call, Throwable t) {
-                Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
+        searchIcon.setOnClickListener(v->{
+            startActivity(new Intent(MainActivity.this,SearchUserActivity.class)
+                  .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
         });
     }
 
@@ -101,15 +78,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void initViews() {
-        toolbar=findViewById(R.id.main_toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.inflateMenu(R.menu.user_profile);
+        mainActivityToolbar=findViewById(R.id.main_activity_toolbar);
+        searchActivityToolbar=findViewById(R.id.search_activity_toolbar);
+        setSupportActionBar(mainActivityToolbar);
+        mainActivityToolbar.inflateMenu(R.menu.user_profile);
         imageView=findViewById(R.id.clcik_main_menu);
+        searchIcon=findViewById(R.id.searchIcon);
         SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         userId = sh.getString("id", "");
         token=sh.getString("token","");
-        serachButton= findViewById(R.id.searchMainButton);
-        searchEditor=findViewById(R.id.searchName);
         recyclerView=findViewById(R.id.searchRecycler);
         fbBtn=findViewById(R.id.createPost);
         alert=new AlertDialog.Builder(this);
@@ -117,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
         progressDialog=new ProgressDialog(this);
     }
 
+    @SuppressLint("NonConstantResourceId")
     private void setUpPopMenu(){
         PopupMenu popupMenu=new PopupMenu(this,imageView);
         popupMenu.getMenuInflater().inflate(R.menu.user_profile,popupMenu.getMenu());
@@ -169,6 +147,30 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+            }
+        });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        searchActivityToolbar.setVisibility(View.GONE);
+        mainActivityToolbar.setVisibility(View.VISIBLE);
+    }
+
+    private void getAllFeeds()
+    {
+        userService.callbackGetAllPost().enqueue(new Callback<GetAllPostModel>() {
+            @Override
+            public void onResponse(Call<GetAllPostModel> call, Response<GetAllPostModel> response) {
+                GetAllPostModel getAllPostModel=response.body();
+                UserPostAdapter userPostAdapter=new UserPostAdapter(getAllPostModel.getBody(),MainActivity.this);
+                recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+                recyclerView.setAdapter(userPostAdapter);
+            }
+            @Override
+            public void onFailure(Call<GetAllPostModel> call, Throwable t) {
+                Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

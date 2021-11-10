@@ -1,15 +1,18 @@
-package com.example.apidemo.SignUpPojo;
+package com.example.apidemo.PojoClasses.GetPost;
+
+import com.example.apidemo.PojoClasses.GetProfile.GetProfileBody;
 
 import java.util.Date;
+import java.util.List;
 
-public class GetPostModel
+public class GetAllPostBody
 {
     public int _id;
     public int user_id;
     public String text;
     public int total_comments;
     public int total_likes;
-    public Object files;
+    public List<String> files;
     public String region;
     public Date createdAt;
     public Date updatedAt;
@@ -56,11 +59,11 @@ public class GetPostModel
         this.total_likes = total_likes;
     }
 
-    public Object getFiles() {
+    public List<String> getFiles() {
         return files;
     }
 
-    public void setFiles(Object files) {
+    public void setFiles(List<String> files) {
         this.files = files;
     }
 

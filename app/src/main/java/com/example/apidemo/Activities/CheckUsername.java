@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +18,7 @@ import com.example.apidemo.Package.ApiClient;
 import com.example.apidemo.R;
 import com.example.apidemo.Service.UserService;
 import com.example.apidemo.SignUpPojo.Model;
+import com.google.android.material.snackbar.Snackbar;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,15 +33,15 @@ public class CheckUsername extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_username);
+        View parentLayout = findViewById(android.R.id.content);
         initViews();
-        checkButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(checkUsername.getText().equals("")){
-                    Toast.makeText(CheckUsername.this, "Fill the blank", Toast.LENGTH_SHORT).show();
-                }else {
-                    checkUsernameMethod(checkUsername.getText().toString());
-                }
+        checkButton.setOnClickListener(v -> {
+            if(checkUsername.getText().toString().equals("")){
+//                Toast.makeText(CheckUsername.this, "Fill the blank", Toast.LENGTH_SHORT).show();
+                Snackbar.make(parentLayout,"Fill the blanck",Snackbar.LENGTH_SHORT).show();
+            }
+            if(!checkUsername.getText().toString().equals("")){
+                checkUsernameMethod(checkUsername.getText().toString());
             }
         });
     }
@@ -53,18 +56,10 @@ public class CheckUsername extends AppCompatActivity {
                     progressDialog.dismiss();
                     AlertDialog.Builder alert=new AlertDialog.Builder(CheckUsername.this);
                     alert.setMessage("Do you want to set this username own profile?");
+                    alert.setPositiveButton("Yes", (dialog, which) -> Toast.makeText
+                            (CheckUsername.this, "Successfully set the username!", Toast.LENGTH_SHORT).show())
+                            .setNegativeButton("No", (dialog, which) -> Toast.makeText(CheckUsername.this, "Thank you", Toast.LENGTH_SHORT).show());
                     alert.show();
-                    alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(CheckUsername.this, "Successfully set the username!", Toast.LENGTH_SHORT).show();
-                        }
-                    }).setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(CheckUsername.this, "Thank you", Toast.LENGTH_SHORT).show();
-                        }
-                    });
                 }
             }
             @Override
