@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.apidemo" >
+    package="com.example.apidemo">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,15 +11,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ApiDemo"
-        android:usesCleartextTraffic="true" >
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".Activities.SearchUserActivity"
+            android:parentActivityName=".Activities.MainActivity"
+            android:exported="false" />
         <activity
             android:name=".Activities.CheckUsername"
+            android:parentActivityName=".Activities.MainActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.ProfileActivity"
+            android:parentActivityName=".Activities.MainActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.ForgetPasswordActivity"
+            android:parentActivityName=".Activities.SignInActivity"
             android:exported="true" />
         <activity
             android:name=".Activities.SignInActivity"
@@ -29,10 +36,11 @@
             android:exported="true" />
         <activity
             android:name=".Activities.SignUpActivity"
+            android:parentActivityName=".Activities.SignInActivity"
             android:exported="true" />
         <activity
             android:name=".Activities.WelcomeActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
