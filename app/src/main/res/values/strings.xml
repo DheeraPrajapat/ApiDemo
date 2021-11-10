@@ -4,4 +4,5 @@
     <string name="email" translatable="false">Email</string>
     <string name="device_type" translatable="false">Device Type</string>
     <string name="address" translatable="false">Address</string>
+    <string name="search">Search</string>
 </resources>
