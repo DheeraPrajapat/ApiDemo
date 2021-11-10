@@ -1,4 +1,6 @@
-package com.example.apidemo.SignUpPojo;
+package com.example.apidemo.PojoClasses.GetProfile;
+
+import com.example.apidemo.PojoClasses.GetProfile.GetProfileBody;
 
 public class GetProfileModel
 {
