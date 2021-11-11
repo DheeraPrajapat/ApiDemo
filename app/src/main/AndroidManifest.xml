@@ -13,21 +13,25 @@
         android:theme="@style/Theme.ApiDemo"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".Activities.SearchUserActivity"
+            android:name=".Activities.CommentsActivity"
             android:parentActivityName=".Activities.MainActivity"
             android:exported="false" />
+        <activity
+            android:name=".Activities.SearchUserActivity"
+            android:exported="false"
+            android:parentActivityName=".Activities.MainActivity" />
         <activity
             android:name=".Activities.CheckUsername"
-            android:parentActivityName=".Activities.MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".Activities.MainActivity" />
         <activity
             android:name=".Activities.ProfileActivity"
-            android:parentActivityName=".Activities.MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".Activities.MainActivity" />
         <activity
             android:name=".Activities.ForgetPasswordActivity"
-            android:parentActivityName=".Activities.SignInActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".Activities.SignInActivity" />
         <activity
             android:name=".Activities.SignInActivity"
             android:exported="true" />
@@ -36,8 +40,8 @@
             android:exported="true" />
         <activity
             android:name=".Activities.SignUpActivity"
-            android:parentActivityName=".Activities.SignInActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".Activities.SignInActivity" />
         <activity
             android:name=".Activities.WelcomeActivity"
             android:exported="true">
