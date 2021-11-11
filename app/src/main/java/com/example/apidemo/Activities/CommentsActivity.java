@@ -2,8 +2,10 @@ package com.example.apidemo.Activities;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -30,7 +32,7 @@ public class CommentsActivity extends AppCompatActivity {
     UserService userService;
     String token="",id="";
     TextInputEditText content;
-    ImageButton postButton;
+    ImageView postButton;
     View parentLayout;
 
     RecyclerView commentRecyclerView;
@@ -43,8 +45,8 @@ public class CommentsActivity extends AppCompatActivity {
             String con=content.getText().toString();
             if(con.isEmpty()){
                 Snackbar.make(parentLayout,"Please write the comment!..",Snackbar.LENGTH_SHORT).show();
-            }else{
-            postTheUserComment(con);}
+            }
+            postTheUserComment(con);
         });
     }
 
@@ -57,7 +59,7 @@ public class CommentsActivity extends AppCompatActivity {
             public void onResponse(Call<CommentModel> call, Response<CommentModel> response) {
                 if(response.isSuccessful()){
                     Snackbar.make(parentLayout,"Comment Posted...",Snackbar.LENGTH_SHORT).show();
-
+                    getAllComments();
                 }
             }
             @Override
@@ -70,7 +72,7 @@ public class CommentsActivity extends AppCompatActivity {
     private void getAllComments()
     {
         int feed_id=getIntent().getIntExtra("feed_id",0);
-        userService.callbackGetAllComments(feed_id,1,10).enqueue(new Callback<GetAllCommentsModel>() {
+        userService.callbackGetAllComments(feed_id,1,100).enqueue(new Callback<GetAllCommentsModel>() {
             @Override
             public void onResponse(Call<GetAllCommentsModel> call, Response<GetAllCommentsModel> response) {
                 if(response.isSuccessful()){
