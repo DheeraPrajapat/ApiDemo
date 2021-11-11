@@ -6,4 +6,6 @@
         android:title="Check Username"/>
     <item android:id="@+id/Profile"
         android:title="Profile"/>
+    <item android:id="@+id/teamOperation"
+        android:title="Teams"/>
 </menu>
