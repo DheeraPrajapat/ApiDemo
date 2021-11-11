@@ -13,9 +13,12 @@
         android:theme="@style/Theme.ApiDemo"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".Activities.CommentsActivity"
-            android:parentActivityName=".Activities.MainActivity"
+            android:name=".Team.TeamActivity"
             android:exported="false" />
+        <activity
+            android:name=".Activities.CommentsActivity"
+            android:exported="false"
+            android:parentActivityName=".Activities.MainActivity" />
         <activity
             android:name=".Activities.SearchUserActivity"
             android:exported="false"

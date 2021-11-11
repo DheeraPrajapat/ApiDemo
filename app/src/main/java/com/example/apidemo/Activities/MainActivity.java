@@ -25,6 +25,7 @@ import com.example.apidemo.R;
 import com.example.apidemo.Service.UserService;
 import com.example.apidemo.SignUpPojo.LogoutModel;
 import com.example.apidemo.PojoClasses.CreatePost.UserPostModel;
+import com.example.apidemo.Team.TeamActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
@@ -110,6 +111,10 @@ public class MainActivity extends AppCompatActivity {
 
                 case R.id.checkUsername:
                     startActivity(new Intent(MainActivity.this,CheckUsername.class));
+                    return true;
+
+                case R.id.teamOperation:
+                    startActivity(new Intent(MainActivity.this, TeamActivity.class));
                     return true;
             }
             return false;
