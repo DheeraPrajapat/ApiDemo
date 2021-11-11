@@ -47,6 +47,14 @@
                 android:layout_toRightOf="@id/getPostImage"
                 android:text="Date" />
 
+            <ImageView
+                android:id="@+id/deletePostButton"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_round_delete_24" />
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,8 +95,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/getPostContent"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="80dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginEnd="80dp"
                     android:src="@drawable/ic_round_mode_comment_24" />
 
                 <TextView

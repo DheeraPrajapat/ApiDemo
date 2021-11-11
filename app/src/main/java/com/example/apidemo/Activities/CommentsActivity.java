@@ -1,12 +1,10 @@
 package com.example.apidemo.Activities;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,13 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.apidemo.Adapter.CommentsAdapter;
 import com.example.apidemo.Package.ApiClient;
 import com.example.apidemo.PojoClasses.CreatePostComment.CommentModel;
-import com.example.apidemo.PojoClasses.GetAllComments.GetAllCommentsBody;
 import com.example.apidemo.PojoClasses.GetAllComments.GetAllCommentsModel;
 import com.example.apidemo.R;
 import com.example.apidemo.Service.UserService;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
-
 
 import retrofit2.Call;
 import retrofit2.Callback;

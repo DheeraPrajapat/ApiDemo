@@ -6,6 +6,7 @@ import com.example.apidemo.PojoClasses.GetPost.GetAllPostModel;
 import com.example.apidemo.PojoClasses.SearchUser.SearchModel;
 import com.example.apidemo.SignUpPojo.ChangePasswordModel;
 import com.example.apidemo.PojoClasses.GetProfile.GetProfileModel;
+import com.example.apidemo.SignUpPojo.DeletePostModel;
 import com.example.apidemo.SignUpPojo.LikeModel;
 import com.example.apidemo.SignUpPojo.LogoutModel;
 import com.example.apidemo.SignUpPojo.Model;
@@ -81,4 +82,7 @@ public interface UserService
     @POST("get-feed-comments")
     Call<GetAllCommentsModel> callbackGetAllComments(@Field("feed_id") int feed_id , @Field("page") int page ,@Field("limit") int limit);
 
+    @FormUrlEncoded
+    @POST("delete-feed")
+    Call<DeletePostModel> callbackDeletePostModel(@Field("feed_id") int feed_id);
 }

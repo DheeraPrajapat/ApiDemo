@@ -1,7 +1,9 @@
 package com.example.apidemo.Adapter;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +21,9 @@ import com.example.apidemo.Package.ApiClient;
 import com.example.apidemo.PojoClasses.GetPost.GetAllPostBody;
 import com.example.apidemo.R;
 import com.example.apidemo.Service.UserService;
+import com.example.apidemo.SignUpPojo.DeletePostModel;
 import com.example.apidemo.SignUpPojo.LikeModel;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -84,6 +88,25 @@ public class UserPostAdapter extends RecyclerView.Adapter<UserPostAdapter.PostVi
             intent.putExtra("feed_id",feedId);
             context.startActivity(intent);
         });
+
+        holder.deletePostButton.setOnClickListener(v -> {
+            AlertDialog.Builder alertDialog=new AlertDialog.Builder(context);
+            alertDialog.setCancelable(false);
+            alertDialog.setTitle("Do you want this post ?");
+            alertDialog.setPositiveButton("Yes", (dialog, which) -> userService.callbackDeletePostModel(feedId).enqueue(new Callback<DeletePostModel>() {
+                @Override
+                public void onResponse(Call<DeletePostModel> call, Response<DeletePostModel> response) {
+                    notifyItemRemoved(position);
+                    getAllPostBodies.remove(position);
+                    Toast.makeText(context, "Post successfully deleted...", Toast.LENGTH_SHORT).show();
+                }
+                @Override
+                public void onFailure(Call<DeletePostModel> call, Throwable t) {
+                    Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            })).setNegativeButton("No",null);
+            alertDialog.show();
+        });
     }
 
     private void setLike(int feedId, int userId, int status, String s, PostViewHolder holder) {
@@ -109,7 +132,7 @@ public class UserPostAdapter extends RecyclerView.Adapter<UserPostAdapter.PostVi
     class PostViewHolder extends RecyclerView.ViewHolder
     {
         TextView name,date,content;
-        ImageView imageView,postUnlikeLikeButton,postCommentButton;
+        ImageView imageView,postUnlikeLikeButton,postCommentButton,deletePostButton;
         public PostViewHolder(@NonNull View itemView) {
             super(itemView);
             name=itemView.findViewById(R.id.getPostUserName);
@@ -117,6 +140,7 @@ public class UserPostAdapter extends RecyclerView.Adapter<UserPostAdapter.PostVi
             date=itemView.findViewById(R.id.getPostDate);
             imageView=itemView.findViewById(R.id.postLikeButton);
             postCommentButton=itemView.findViewById(R.id.postCommentButton);
+            deletePostButton=itemView.findViewById(R.id.deletePostButton);
             postUnlikeLikeButton=itemView.findViewById(R.id.postUnlikeLikeButton);
         }
     }
