@@ -9,6 +9,5 @@
     <string name="comment_content" translatable="false">Comment Content</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
-    <string name="back" translatable="false">BackWord</string>
-    <string name="forword">Forword</string>
+    <string name="forword" translatable="false">Forword</string>
 </resources>

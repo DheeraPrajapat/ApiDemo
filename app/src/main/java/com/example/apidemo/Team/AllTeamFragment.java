@@ -17,9 +17,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -37,7 +39,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AllTeamFragment extends Fragment {
-    TextView unAvailable;
+    TextView unAvailable,createTeam;
     RecyclerView recyclerView;
     String token="",id="";
     TeamService teamService;
@@ -54,11 +56,13 @@ public class AllTeamFragment extends Fragment {
         initViews(view);
         getUserTeams(view);
         final NavController navController = Navigation.findNavController(view);
-
+        createTeam.setOnClickListener(v -> navController.navigate(R.id.action_userTeamFragment_to_createTeamFragment));
     }
 
     private void initViews(View view){
         recyclerView=view.findViewById(R.id.userTeamRecycle);
+        //optionsImage=view.findViewById(R.id.fragmentOptionsImage);
+        createTeam=view.findViewById(R.id.createTeam);
         SharedPreferences sharedPreferences= getContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         token=sharedPreferences.getString("token","");
         id=sharedPreferences.getString("id","");
