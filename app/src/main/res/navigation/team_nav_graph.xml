@@ -16,9 +16,9 @@
     </fragment>
     <fragment
         android:id="@+id/userTeamFragment"
-        android:name="com.example.apidemo.Team.UserTeamFragment"
+        android:name="com.example.apidemo.Team.AllTeamFragment"
         android:label="fragment_user_team"
-        tools:layout="@layout/fragment_user_team" >
+        tools:layout="@layout/fragment_all_team" >
         <action
             android:id="@+id/action_userTeamFragment_to_createTeamFragment"
             app:destination="@id/createTeamFragment" />
