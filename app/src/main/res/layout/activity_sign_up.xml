@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,90 +10,98 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:background="@drawable/activity_design"
-        android:layout_marginLeft="125dp"
-        android:layout_height="100dp"/>
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/signUpLogo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="200dp"
-        android:text="Hello!\nPlease SignUp"
-        android:textColor="@color/black"
-        android:textSize="20dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/activity_design"
+            android:layout_marginLeft="125dp"
+            android:layout_height="100dp"/>
 
-    <EditText
-        android:id="@+id/et_Email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/signUpLogo"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="19dp"
-        android:background="@drawable/edittext_shape"
-        android:ems="10"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        android:padding="10dp"
-        android:textColor="@color/black" />
-
-    <EditText
-        android:id="@+id/et_Type"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/et_Email"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="40dp"
-        android:background="@drawable/edittext_shape"
-        android:padding="10dp"
-        android:textColor="@color/black"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Device Type"
-        android:inputType="text" />
-
-    <EditText
-        android:id="@+id/et_CTPass"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/et_Type"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="40dp"
-        android:background="@drawable/edittext_shape"
-        android:padding="10dp"
-        android:textColor="@color/black"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Create Password"
-        android:inputType="numberPassword" />
+        <TextView
+            android:id="@+id/signUpLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="150dp"
+            android:text="Hello!\nPlease SignUp"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
 
 
-    <EditText
-        android:id="@+id/et_Adress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/et_CTPass"
-        android:background="@drawable/edittext_shape"
-        android:padding="10dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Region"
-        android:inputType="text"
-        android:textColor="@color/black" />
+        <EditText
+            android:id="@+id/et_Email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/signUpLogo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="19dp"
+            android:background="@drawable/edittext_shape"
+            android:ems="10"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:padding="10dp"
+            android:textColor="@color/black" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/et_Adress"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="40dp"
-        app:backgroundTint="@color/black"
-        android:background="@drawable/button_shape"
-        android:layout_marginTop="30dp"
-        android:text="SignUp" />
-</RelativeLayout>
+        <EditText
+            android:id="@+id/et_Type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_Email"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="40dp"
+            android:background="@drawable/edittext_shape"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="Device Type"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/et_CTPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_Type"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="40dp"
+            android:background="@drawable/edittext_shape"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="Create Password"
+            android:inputType="numberPassword" />
+
+
+        <EditText
+            android:id="@+id/et_Adress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_CTPass"
+            android:background="@drawable/edittext_shape"
+            android:padding="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="Region"
+            android:inputType="text"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_Adress"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="40dp"
+            app:backgroundTint="@color/black"
+            android:background="@drawable/button_shape"
+            android:layout_marginTop="30dp"
+            android:text="SignUp" />
+
+    </RelativeLayout>
+
+</ScrollView>
