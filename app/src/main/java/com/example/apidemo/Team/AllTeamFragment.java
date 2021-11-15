@@ -119,19 +119,20 @@ class AllTeamAdapter extends RecyclerView.Adapter<AllTeamAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
             holder.creatorName.setText(userTeamBodies.get(position).getUser().getUsername());
             holder.teamName.setText(userTeamBodies.get(position).getTitle());
-        Glide.with(context).load(baseUrl+userTeamBodies.get(position).getImage()).into(holder.teamImage);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder alert=new AlertDialog.Builder(context);
-                alert.setTitle("Team Information");
-                alert.setCancelable(false).setMessage("Team name :- "+userTeamBodies.get(position).getTitle()+"\n"
-                                +"Creator name :- "+userTeamBodies.get(position).getUser().getUsername()+"\n"
-                                +"Region :- "+userTeamBodies.get(position).getRegion()+"\n"
-                                +"Description :- "+userTeamBodies.get(position).getDescription()
-                ).setPositiveButton("Ok",null);
-                alert.show();
+            if(userTeamBodies.get(position).getImage()==null){
+                holder.teamImage.setImageResource(R.drawable.ic_psychology);
+            }else {
+                Glide.with(context).load(baseUrl + userTeamBodies.get(position).getImage()).into(holder.teamImage);
             }
+        holder.itemView.setOnClickListener(v -> {
+            AlertDialog.Builder alert=new AlertDialog.Builder(context);
+            alert.setTitle("Team Information");
+            alert.setCancelable(false).setMessage("Team name :- "+userTeamBodies.get(position).getTitle()+"\n"
+                            +"Creator name :- "+userTeamBodies.get(position).getUser().getUsername()+"\n"
+                            +"Region :- "+userTeamBodies.get(position).getRegion()+"\n"
+                            +"Description :- "+userTeamBodies.get(position).getDescription()
+            ).setPositiveButton("Ok",null);
+            alert.show();
         });
     }
 
