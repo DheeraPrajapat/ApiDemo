@@ -24,14 +24,14 @@
        android:textStyle="bold" />
 
    <com.google.android.material.floatingactionbutton.FloatingActionButton
+       android:id="@+id/createPost"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-         android:src="@drawable/ic_round_create_24"
-      app:backgroundTint="#DFD9D9"
-      android:id="@+id/createPost"
-      android:layout_alignParentEnd="true"
-      android:layout_alignParentBottom="true"
-      android:layout_marginRight="20dp"
-      android:layout_marginBottom="100dp"/>
+       android:layout_alignParentEnd="true"
+       android:layout_alignParentBottom="true"
+       android:layout_marginRight="20dp"
+       android:layout_marginBottom="100dp"
+       android:src="@drawable/ic_round_create_24"
+       app:backgroundTint="#DFD9D9" />
 
 </RelativeLayout>

@@ -5,87 +5,154 @@
     android:layout_height="match_parent"
     tools:context=".Team.CreateTeamFragment">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:textSize="20sp"
+            android:id="@+id/createTeamBackbtn"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:text="@string/back" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginStart="20dp"
-                    android:textSize="20sp"
-                    android:id="@+id/createTeamBackbtn"
-                    android:padding="10dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:text="Back" />
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_marginTop="90dp"
+           android:layout_height="match_parent">
 
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="120dp"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginEnd="30dp"
-                    android:layout_below="@id/createTeamBackbtn"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:textStyle="bold"
-                            android:textColor="@color/black"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                                android:text="Team name"/>
-
-                        <EditText
-                            android:id="@+id/createTeamName"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:background="@drawable/edittext_shape"
-                            android:hint="Team Name"
-                            android:padding="10dp"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
-                                android:text="Description"
-                                android:textColor="@color/black"
-                                android:textStyle="bold"/>
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                                android:layout_marginTop="10dp"
-                            android:layout_height="80dp"
-                        android:background="@drawable/edittext_shape"
-                                android:padding="10dp"
-                                android:hint="Description"
-                                android:id="@+id/createDescription"/>
-
-                        <CheckBox
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                                android:text="Private"
-                                android:shadowColor="@color/black"
-                                android:id="@+id/cbPrivate"
-                                android:layout_gravity="center"
-                                android:layout_marginTop="15dp"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/txt_createTeamBtn"
-                                android:text="Create"
-                                android:layout_gravity="center"
-                                android:background="@drawable/button_shape"
-                                android:padding="10dp"
-                            android:layout_marginTop="30dp"
-                                android:textColor="@color/white"/>
-
-                </LinearLayout>
+               <RelativeLayout
+                   android:layout_width="match_parent"
+                   android:id="@+id/createTeamRelativeRelative"
+                   android:visibility="visible"
+                   android:layout_height="wrap_content">
 
 
-        </RelativeLayout>
+                       <LinearLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_marginStart="30dp"
+                           android:layout_marginEnd="30dp"
+                           android:orientation="vertical">
+
+                               <TextView
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:text="Team name"
+                                   android:textColor="@color/black"
+                                   android:textStyle="bold" />
+
+                               <EditText
+                                   android:id="@+id/createTeamName"
+                                   android:layout_width="match_parent"
+                                   android:layout_height="wrap_content"
+                                   android:layout_marginTop="10dp"
+                                   android:background="@drawable/edittext_shape"
+                                   android:hint="Team Name"
+                                   android:padding="10dp" />
+
+                               <TextView
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:layout_marginTop="20dp"
+                                   android:text="Description"
+                                   android:textColor="@color/black"
+                                   android:textStyle="bold" />
+
+                               <com.google.android.material.textfield.TextInputEditText
+                                   android:id="@+id/createDescription"
+                                   android:layout_width="match_parent"
+                                   android:layout_height="80dp"
+                                   android:layout_marginTop="10dp"
+                                   android:background="@drawable/edittext_shape"
+                                   android:hint="Description"
+                                   android:padding="10dp" />
+
+                               <CheckBox
+                                   android:id="@+id/cbPrivate"
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:layout_gravity="center"
+                                   android:layout_marginTop="15dp"
+                                   android:shadowColor="@color/black"
+                                   android:text="Private" />
+
+                               <TextView
+                                   android:id="@+id/txt_createTeamBtn"
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:layout_gravity="center"
+                                   android:layout_marginTop="30dp"
+                                   android:background="@drawable/button_shape"
+                                   android:padding="10dp"
+                                   android:text="Create"
+                                   android:textColor="@color/white" />
+
+                       </LinearLayout>
+               </RelativeLayout>
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                       android:text="User Teams"
+                       android:layout_below="@id/createTeamRelativeRelative"
+                       android:layout_centerHorizontal="true"
+                       android:layout_marginTop="20dp"
+                       android:textSize="25dp"
+                   android:id="@+id/teamlogo"
+                       android:textStyle="bold"
+                       android:textColor="@color/black"/>
+
+               <RelativeLayout
+                   android:id="@+id/getUserTeamRelative"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_below="@id/teamlogo"
+                   android:layout_marginTop="20dp">
+
+
+                       <ImageView
+                           android:id="@+id/deleteUserTeam"
+                           android:layout_width="30dp"
+                           android:layout_height="30dp"
+                           android:layout_alignParentEnd="true"
+                           android:layout_marginTop="20dp"
+                           android:layout_marginEnd="20dp"
+                           android:src="@drawable/ic_round_delete_24" />
+
+                       <ImageView
+                           android:layout_width="30dp"
+                           android:layout_height="30dp"
+                           android:src="@drawable/ic_round_create_24"
+                               android:layout_below="@id/deleteUserTeam"
+                               android:layout_alignParentEnd="true"
+                               android:layout_marginEnd="20dp"
+                               android:layout_marginTop="20dp"
+                               android:id="@+id/editTeamInformation"/>
+
+                       <ImageView
+                           android:id="@+id/getUserTeamImage"
+                           android:layout_width="100dp"
+                           android:layout_height="100dp"
+                           android:layout_centerHorizontal="true"
+                           android:src="@drawable/ic_psychology" />
+
+                       <TextView
+                           android:id="@+id/getUserTeamInformation"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_below="@id/getUserTeamImage"
+                           android:layout_centerHorizontal="true"
+                           android:layout_marginTop="10dp"
+                           android:text="Title"
+                           android:textAlignment="center"
+                           android:textAllCaps="false"
+                           android:textColor="@color/black"
+                           android:textSize="15dp"
+                           android:textStyle="italic" />
+
+               </RelativeLayout>
+
+       </RelativeLayout>
 </FrameLayout>
