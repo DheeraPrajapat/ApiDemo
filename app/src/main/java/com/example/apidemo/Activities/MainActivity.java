@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.apidemo.Adapter.UserPostAdapter;
+import com.example.apidemo.Friend.FriendList.FriendListActivity;
 import com.example.apidemo.Package.ApiClient;
 import com.example.apidemo.PojoClasses.GetPost.GetAllPostModel;
 import com.example.apidemo.R;
@@ -115,6 +116,9 @@ public class MainActivity extends AppCompatActivity {
 
                 case R.id.teamOperation:
                     startActivity(new Intent(MainActivity.this, TeamActivity.class));
+                    return true;
+                case R.id.friendList:
+                    startActivity(new Intent(MainActivity.this, FriendListActivity.class));
                     return true;
             }
             return false;
