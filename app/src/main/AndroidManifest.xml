@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.apidemo">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -12,6 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ApiDemo"
         android:usesCleartextTraffic="true">
+        <receiver
+            android:name=".Receiver.InternetReceiver"
+            android:enabled="false"
+            android:exported="false"></receiver>
+
         <activity
             android:name=".Friend.FriendList.FriendListActivity"
             android:exported="false" />

@@ -48,6 +48,18 @@
             android:padding="7dp"
             android:src="@drawable/ic_round_add_24"
             android:id="@+id/sendRequestButton"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:visibility="gone"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/round_shape"
+            android:padding="7dp"
+            android:src="@drawable/ic_check"
+            android:id="@+id/acceptRequestButton"/>
+
     </RelativeLayout>
 
 </RelativeLayout>
