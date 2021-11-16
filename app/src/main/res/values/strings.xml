@@ -11,4 +11,13 @@
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="forword" translatable="false">Forword</string>
     <string name="back">Back</string>
+    <string name="create_title">Create Title</string>
+    <string name="color">Color</string>
+    <string name="team_event">Team Event</string>
+    <string name="school_event">School event</string>
+    <string name="end_time">End time</string>
+    <string name="start_time">Start time</string>
+    <string name="event_description">Event Description</string>
+    <string name="event_name">Event name</string>
+    <string name="fill_event_information">Fill event information</string>
 </resources>
