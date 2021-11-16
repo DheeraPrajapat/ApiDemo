@@ -31,7 +31,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_forget_password);
         initViews();
         button.setOnClickListener(v -> {
-            if(editText.getText().toString().equals("")){
+            if(editText.getText().toString().trim().equals("")){
                 Toast.makeText(ForgetPasswordActivity.this, "Fill the blank...", Toast.LENGTH_SHORT).show();
             }
             sendForgetPasswordLink(editText.getText().toString());

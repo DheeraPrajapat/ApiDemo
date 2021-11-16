@@ -44,7 +44,7 @@ public class SearchUserActivity extends AppCompatActivity {
             }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.toString().isEmpty()) {
+                if (s.toString().trim().isEmpty()) {
                     Toast.makeText(SearchUserActivity.this, "Enter the name...", Toast.LENGTH_SHORT).show();
                 }else{
                 setTheSearchItem(s.toString());}

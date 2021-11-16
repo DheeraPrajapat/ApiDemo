@@ -38,11 +38,12 @@ public class CommentsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_comments);
         initViews();
         postButton.setOnClickListener(v->{
-            String con=content.getText().toString();
-            if(con.isEmpty()){
+            String con=content.getText().toString().trim();
+            if(con.equals("")){
                 Snackbar.make(parentLayout,"Please write the comment!..",Snackbar.LENGTH_SHORT).show();
+            }else {
+                postTheUserComment(con);
             }
-            postTheUserComment(con);
         });
     }
 

@@ -32,7 +32,7 @@ public class SignInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
         initViews();
         btn1.setOnClickListener(v->{
-            if(edit1.getText().toString().equals("") || edit2.getText().toString().equals("")){
+            if(edit1.getText().toString().trim().equals("") || edit2.getText().toString().trim().equals("")){
                 Toast.makeText(SignInActivity.this, "Fill the blank", Toast.LENGTH_SHORT).show();
             }else{
                 String email,password;

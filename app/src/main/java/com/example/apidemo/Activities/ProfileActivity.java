@@ -55,7 +55,7 @@ public class ProfileActivity extends AppCompatActivity {
         updateBtn.setOnClickListener(v->{
             String device =dType.getText().toString();
             String Region=region.getText().toString();
-            if(device.equalsIgnoreCase("") || Region.equalsIgnoreCase("")){
+            if(device.trim().equalsIgnoreCase("") || Region.trim().equalsIgnoreCase("")){
                 Toast.makeText(ProfileActivity.this, "Field cannot be blank...", Toast.LENGTH_SHORT).show();
             }else {
                 updateTheUserData(device,Region);

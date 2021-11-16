@@ -71,8 +71,8 @@ public class CreateTeamFragment extends Fragment {
             navController.navigate(R.id.action_createTeamFragment_to_userTeamFragment);
         });
         createTeamBtn.setOnClickListener(v -> {
-            String title=teamName.getText().toString();
-            String desc=teamDescription.getText().toString();
+            String title=teamName.getText().toString().trim();
+            String desc=teamDescription.getText().toString().trim();
             if (title.isEmpty() && desc.isEmpty()){
                 Toast.makeText(getActivity(), "Fill the all required field", Toast.LENGTH_SHORT).show();
 //                Snackbar.make(snackBarView,"Please fill the required information!",Snackbar.LENGTH_SHORT).show();
@@ -116,7 +116,7 @@ public class CreateTeamFragment extends Fragment {
                     }
                 });
                 update.setOnClickListener(v1->{
-                    if(title.getText().toString().equals("") || desc.getText().toString().equals("")){
+                    if(title.getText().toString().trim().equals("") || desc.getText().toString().trim().equals("")){
                         Toast.makeText(getContext(), "Fill the all required field....", Toast.LENGTH_SHORT).show();
                     }else{
                         ProgressDialog progressDialog=new ProgressDialog(getContext());

@@ -35,9 +35,9 @@ public class SignUpActivity extends AppCompatActivity {
         initViews();
 
         buttonSignUp.setOnClickListener(v->{
-           if(editTextEmail.getText().equals("")
-                ||editTextCPassword.getText().equals("")
-                ||editTextDeviceType.getText().equals("")){
+           if(editTextEmail.getText().toString().trim().equals("")
+                ||editTextCPassword.getText().toString().trim().equals("")
+                ||editTextDeviceType.getText().toString().trim().equals("")){
                Toast.makeText(SignUpActivity.this, "Fill the all field!", Toast.LENGTH_SHORT).show();
            }else {
                String email=editTextEmail.getText().toString();
