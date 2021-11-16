@@ -48,6 +48,8 @@ public class UserItemAdapter extends RecyclerView.Adapter<UserItemAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        holder.acceptRequest.setVisibility(View.GONE);
+        holder.sendRequest.setVisibility(View.VISIBLE);
         holder.dType.setText(arrayList.get(position).getDevice_type());
         holder.name.setText(arrayList.get(position).getEmail());
         holder.itemView.setOnClickListener(v -> {
@@ -104,11 +106,12 @@ public class UserItemAdapter extends RecyclerView.Adapter<UserItemAdapter.ViewHo
     class ViewHolder extends RecyclerView.ViewHolder
     {
         TextView name,dType;
-        ImageView sendRequest;
+        ImageView sendRequest,acceptRequest;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             name=itemView.findViewById(R.id.userFullName);
             dType=itemView.findViewById(R.id.userDeviceType);
+            acceptRequest= itemView.findViewById(R.id.acceptRequestButton);
             sendRequest= itemView.findViewById(R.id.sendRequestButton);
         }
     }

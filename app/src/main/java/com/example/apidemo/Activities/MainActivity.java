@@ -2,6 +2,7 @@ package com.example.apidemo.Activities;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -138,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
         Button cancelButton=view.findViewById(R.id.postCancelButton);
         cancelButton.setOnClickListener(v->alertDialog.dismiss());
         submitButton.setOnClickListener(v->{
-            String content=editText.getText().toString();
+            String content=editText.getText().toString().trim();
             if(content.isEmpty()){
                 Toast.makeText(MainActivity.this,"Write something...",Toast.LENGTH_SHORT).show();
             }else{
