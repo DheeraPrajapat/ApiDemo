@@ -6,6 +6,17 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,30 +24,14 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.PopupMenu;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.example.apidemo.Package.ApiClient;
 import com.example.apidemo.R;
 import com.example.apidemo.Service.TeamService;
-import com.example.apidemo.Service.UserService;
 import com.example.apidemo.Team.CreateTeamPojo.CreateTeamModel;
 import com.example.apidemo.Team.DeleteTeamPojo.DeleteModel;
 import com.example.apidemo.Team.UpdateTeamInfo.UpdateModel;
 import com.example.apidemo.Team.UserTeamPojo.UserTeamModel;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
 import retrofit2.Call;
@@ -57,7 +52,6 @@ public class CreateTeamFragment extends Fragment {
         @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_create_team,null,false);
     }
 
@@ -233,9 +227,9 @@ public class CreateTeamFragment extends Fragment {
             @Override
             public void onResponse(@NonNull Call<CreateTeamModel> call, @NonNull Response<CreateTeamModel> response) {
                 if(response.isSuccessful()){
+                    progressDialog.dismiss();
                     teamName.setText("");
                     teamDescription.setText("");
-                    progressDialog.dismiss();
                     getUserTeam();
                     Toast.makeText(getContext(), response.message(), Toast.LENGTH_SHORT).show();
                 }
@@ -243,7 +237,6 @@ public class CreateTeamFragment extends Fragment {
             @Override
             public void onFailure(@NonNull Call<CreateTeamModel> call, @NonNull Throwable t) {
                 progressDialog.dismiss();
-//                    Snackbar.make(snackBarView,t.getMessage(),Snackbar.LENGTH_SHORT).show();
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -269,6 +262,5 @@ public class CreateTeamFragment extends Fragment {
         userTeamImage=view.findViewById(R.id.getUserTeamImage);
         userTeamInfo=view.findViewById(R.id.getUserTeamInformation);
         editTeamInformation=view.findViewById(R.id.editTeamInformation);
-//        snackBarView=view.findViewById(R.id.content);
     }
 }
