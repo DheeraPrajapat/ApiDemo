@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/CreateEvent"
-        android:title="@string/create_title"/>
+        android:title="@string/create_event"/>
+
+    <item android:id="@+id/Admin_competition"
+        android:title="@string/admin_competition"/>
+
+    <item android:id="@+id/OwnTeamEvent"
+        android:title="@string/own_team_event"/>
+
+    <item android:id="@+id/OwnSchoolEvent"
+        android:title="@string/own_school_event"/>
 </menu>

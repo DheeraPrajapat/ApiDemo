@@ -142,7 +142,7 @@ class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.ListViewH
     @NonNull
     @Override
     public ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.friend_view,null,false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.friend_event_view,null,false);
         return new ListViewHolder(view);
     }
 

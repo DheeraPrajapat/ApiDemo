@@ -17,8 +17,8 @@
        android:layout_below="@id/set_toolbar"
        android:layout_centerHorizontal="true"
        android:layout_marginTop="10dp"
-       android:background="#E3E3E3"
        android:layout_marginRight="20dp"
+       android:background="#E3E3E3"
        android:textColor="@color/black"
        android:textSize="25dp"
        android:textStyle="bold" />

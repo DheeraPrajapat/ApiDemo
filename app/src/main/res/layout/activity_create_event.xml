@@ -17,10 +17,9 @@
         android:layout_marginBottom="10dp" />
 
     <RelativeLayout
-        android:layout_width="match_parent"
         android:id="@+id/CreateEventRelative"
-        android:layout_height="match_parent"
-        android:layout_above="@id/createNewEvent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="10dp">
 
         <TextView
@@ -39,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="100dp"
-            android:layout_marginTop="120dp"
+            android:layout_marginTop="80dp"
             android:autofillHints="no"
             android:background="@drawable/edittext_shape"
             android:hint="@string/event_name"
@@ -86,9 +85,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/endTime"
-            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="60dp"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <RadioButton
                 android:id="@+id/schoolEvent"
@@ -111,11 +110,24 @@
             android:id="@+id/selectColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/linearLayout"
-            android:layout_centerHorizontal="true"
+            android:layout_below="@id/endTime"
+            android:layout_marginLeft="50dp"
             android:layout_marginTop="30dp"
+            android:layout_toEndOf="@id/linearLayout"
             android:text="@string/color"
             android:textAllCaps="false"
+            android:textColor="@color/white" />
+
+
+        <Button
+            android:id="@+id/createEventButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linearLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="20dp"
+            android:text="Create Event"
             android:textColor="@color/white" />
 
 
@@ -127,7 +139,7 @@
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="60dp"
         android:background="@drawable/round_shape_white"
         android:padding="10dp"
         android:src="@drawable/ic_event" />

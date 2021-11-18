@@ -51,6 +51,7 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 
     implementation 'com.github.yukuku:ambilwarna:2.0.1'
+    implementation 'com.vdurmont:emoji-java:4.0.0'
 
 // Java
     implementation "androidx.navigation:navigation-fragment:2.3.5"

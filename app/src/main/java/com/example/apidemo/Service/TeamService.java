@@ -1,5 +1,7 @@
 package com.example.apidemo.Service;
 
+import com.example.apidemo.Event.AdminCompetition.AdminCompetitionModel;
+import com.example.apidemo.Event.OwnEvent.OwnEventModel;
 import com.example.apidemo.PojoClasses.CreatePost.UserPostModel;
 import com.example.apidemo.Team.CreateTeamPojo.CreateTeamModel;
 import com.example.apidemo.Team.DeleteTeamPojo.DeleteModel;
@@ -28,10 +30,27 @@ public interface TeamService
     Call<CreateTeamModel> callbackCreateTeam(@Field("title") String title, @Field("admin_id") int admin_id , @Field("description") String description);
 
     @FormUrlEncoded
-    @POST("Delete-team")
+    @POST("delete-team")
     Call<DeleteModel> callDeleteTeam(@Field("team_id") String teamId, @Field("admin_id") int admin_id);
 
     @FormUrlEncoded
     @POST("update-team")
     Call<UpdateModel> callUpdateTeam(@Field("team_id") int team_id , @Field("title") String title , @Field("description") String description);
+
+    @FormUrlEncoded
+    @POST("create-event")
+    Call<CreateTeamModel> callbackCreateEvent(@Field("title") String title,@Field("user_id") int user_id , @Field("team_id") int team_id,
+                                                @Field("start_time") String startTime,@Field("end_time") String endTime ,@Field("description") String description,
+                                              @Field("event_type") int event_type , @Field("color") String color);
+
+    @GET("admin-competitions")
+    Call<AdminCompetitionModel> callbackGetAdminCompetition();
+
+    @FormUrlEncoded
+    @POST("school-events")
+    Call<OwnEventModel> callOwnSchoolEventModel(@Field("user-id") String userId);
+
+    @FormUrlEncoded
+    @POST("team-events")
+    Call<OwnEventModel> callOwnTeamEventModel(@Field("team_id") int teamId);
 }
