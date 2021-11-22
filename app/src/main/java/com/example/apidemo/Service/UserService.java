@@ -42,7 +42,7 @@ public interface UserService
 
     @FormUrlEncoded
     @POST("user-update")
-    Call<GetProfileModel> callUpdateTheUserInformation(@Field("address") String address,@Field("device-type")String type);
+    Call<GetProfileModel> callUpdateTheUserInformation(@Field("address") String address,@Field("device_type")String type);
 
     @FormUrlEncoded
     @POST("user-change-password")

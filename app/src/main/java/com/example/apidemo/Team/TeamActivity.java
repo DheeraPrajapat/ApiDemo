@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.example.apidemo.Event.AdminCompetition.AdminCompetitionBody;
 import com.example.apidemo.Event.AdminCompetition.AdminCompetitionModel;
 import com.example.apidemo.Event.OwnEvent.OwnEventModel;
+import com.example.apidemo.Event.OwnSchoolEventsActivity;
 import com.example.apidemo.Friend.FriendList.FriendListActivity;
 import com.example.apidemo.Package.ApiClient;
 import com.example.apidemo.PojoClasses.GetProfile.GetProfileModel;
@@ -62,9 +63,9 @@ public class TeamActivity extends AppCompatActivity {
                     }else if(item.getItemId()==R.id.Admin_competition){
                         showAdminCompetitions();
                     }else if(item.getItemId()==R.id.OwnTeamEvent){
-                        showOwnTeamEvent("team");
+                            startActivity(new Intent(TeamActivity.this,OwnTeamEventsActivity.class));
                     }else if(item.getItemId()==R.id.OwnSchoolEvent){
-                        showOwnTeamEvent("school");
+                        startActivity(new Intent(TeamActivity.this, OwnSchoolEventsActivity.class));
                     }
                     return false;
                 }
@@ -98,70 +99,9 @@ public class TeamActivity extends AppCompatActivity {
             }
         });
     }
-
     private void initViews() {
             optionsImage=findViewById(R.id.thereedots);
     }
-    private void showOwnTeamEvent(String type) {
-            SharedPreferences sharedPreferences=getSharedPreferences("MySharedPref",MODE_PRIVATE);
-            String token=sharedPreferences.getString("token","");
-            String userId=sharedPreferences.getString("id","");
-            TeamService teamService=ApiClient.getClientTokn(token).create(TeamService.class);
-            AlertDialog alertDialog=new AlertDialog.Builder(this).create();
-            View view=LayoutInflater.from(getApplicationContext()).inflate(R.layout.event_list,null,false);
-            alertDialog.setView(view);
-            RecyclerView recyclerView=view.findViewById(R.id.ownEventList);
-            if (type.equals("team")){
-                teamService.callOwnSchoolEventModel(userId).enqueue(new Callback<OwnEventModel>() {
-                    @Override
-                    public void onResponse(Call<OwnEventModel> call, Response<OwnEventModel> response) {
-                        if(response.isSuccessful()){
-                            OwnEventModel ownEventModel=response.body();
-                            OwnSchoolEventAdapter ownSchoolEventAdapter=new OwnSchoolEventAdapter(ownEventModel.getBody().getSchool_event(), TeamActivity.this);
-                            recyclerView.setLayoutManager(new LinearLayoutManager(TeamActivity.this));
-                            recyclerView.setAdapter(ownSchoolEventAdapter);
-                        }
-                    }
-                    @Override
-                    public void onFailure(Call<OwnEventModel> call, Throwable t) {
-                        Toast.makeText(TeamActivity.this, "Failed :- "+t.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }else if(type.equalsIgnoreCase("school")){
-                final String[] teamId = {""};
-                UserService userService=ApiClient.getClientTokn(token).create(UserService.class);
-                userService.callGetUserInformation(userId).enqueue(new Callback<GetProfileModel>() {
-                    @Override
-                    public void onResponse(Call<GetProfileModel> call, Response<GetProfileModel> response) {
-                        if(response.isSuccessful()){
-                            GetProfileModel getProfileModel=response.body();
-                            teamId[0] =getProfileModel.getBody().getTeam_id();
-                        }
-                    }
-                    @Override
-                    public void onFailure(Call<GetProfileModel> call, Throwable t) {
-                        Toast.makeText(TeamActivity.this, "Failed :- "+t.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-                teamService.callOwnTeamEventModel(Integer.parseInt(Arrays.toString(teamId))).enqueue(new Callback<OwnEventModel>() {
-                    @Override
-                    public void onResponse(Call<OwnEventModel> call, Response<OwnEventModel> response) {
-                        if(response.isSuccessful()){
-                            OwnEventModel ownEventModel=response.body();
-                            OwnTeamEventAdapter ownSchoolEventAdapter=new OwnTeamEventAdapter(ownEventModel.getBody().getTeam_event(), TeamActivity.this);
-                            recyclerView.setLayoutManager(new LinearLayoutManager(TeamActivity.this));
-                            recyclerView.setAdapter(ownSchoolEventAdapter);
-                        }
-                    }
-                    @Override
-                    public void onFailure(Call<OwnEventModel> call, Throwable t) {
-                        Toast.makeText(TeamActivity.this, "Failed :- "+t.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-            alertDialog.show();
-    }
-
 }
 
 
@@ -218,7 +158,6 @@ class AdminCompetitionsAdapter extends RecyclerView.Adapter<AdminCompetitionsAda
             getGetEt_Type=itemView.findViewById(R.id.getEventType);
             friendItem=itemView.findViewById(R.id.friendListItemLayout);
             eventItem=itemView.findViewById(R.id.eventListItemLayout);
-
             friendItem.setVisibility(View.GONE);
             eventItem.setVisibility(View.VISIBLE);
         }

@@ -14,6 +14,12 @@
         android:theme="@style/Theme.ApiDemo"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Event.OwnSchoolEventsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Team.OwnTeamEventsActivity"
+            android:exported="false" />
+        <activity
             android:name=".Team.CreateEventActivity"
             android:exported="false" />
 

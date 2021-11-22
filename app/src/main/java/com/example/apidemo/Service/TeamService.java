@@ -2,6 +2,8 @@ package com.example.apidemo.Service;
 
 import com.example.apidemo.Event.AdminCompetition.AdminCompetitionModel;
 import com.example.apidemo.Event.OwnEvent.OwnEventModel;
+import com.example.apidemo.Event.OwnEvent.OwnSchoolEventsModel;
+import com.example.apidemo.Event.OwnEvent.OwnTeamEventModel;
 import com.example.apidemo.PojoClasses.CreatePost.UserPostModel;
 import com.example.apidemo.Team.CreateTeamPojo.CreateTeamModel;
 import com.example.apidemo.Team.DeleteTeamPojo.DeleteModel;
@@ -48,9 +50,9 @@ public interface TeamService
 
     @FormUrlEncoded
     @POST("school-events")
-    Call<OwnEventModel> callOwnSchoolEventModel(@Field("user-id") String userId);
+    Call<OwnSchoolEventsModel> callOwnSchoolEventModel(@Field("user_id") String userId);
 
     @FormUrlEncoded
     @POST("team-events")
-    Call<OwnEventModel> callOwnTeamEventModel(@Field("team_id") int teamId);
+    Call<OwnTeamEventModel> callOwnTeamEventModel(@Field("team_id") int teamId);
 }
