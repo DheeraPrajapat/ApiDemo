@@ -52,14 +52,16 @@ public class CreateEventActivity extends AppCompatActivity {
     EditText eventTitle,eventDescription;
     Button startBtn,endBtn,colorBtn,createEventButton;
     RadioButton schoolRadioBtn,teamRadioButton;
-    int  mHour, mMinute,defaultColor;
+    int  mStartHour, mStartMinute,mEndHour,mEndMinute,defaultColor;
     RelativeLayout layout,CreateEventRelative;
     UserService userService;
     TeamService teamService;
+    int startHour,startMinute,endHour,endMinute;
     RecyclerView eventRecyclerView;
-    int user_id,team_id,event_type=0,viewShow=0;
+    int user_id,event_type=0,viewShow=0;
     String token,startTime="",endTime="";
     View snackBarView;
+    int startTIME;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,25 +81,28 @@ public class CreateEventActivity extends AppCompatActivity {
             teamRadioButton.setChecked(true);
         });
         startBtn.setOnClickListener(v-> {
-            final Calendar c = Calendar.getInstance();
-            mHour = c.get(Calendar.HOUR_OF_DAY);
-            mMinute = c.get(Calendar.MINUTE);
             @SuppressLint("SetTextI18n")
             TimePickerDialog timePickerDialog=new TimePickerDialog(this, (view, hourOfDay, minute) -> {
                 startBtn.setText(hourOfDay+":"+minute);
-                startTime=hourOfDay+":"+minute;
-            },mHour,mMinute,false);
+                startTime=hourOfDay+""+minute;
+                startHour=hourOfDay;
+                startMinute=minute;
+                startTIME=Integer.parseInt(startTime);
+            },mStartHour,mStartMinute,true);
+            timePickerDialog.updateTime(startHour,startMinute);
             timePickerDialog.show();
         });
         endBtn.setOnClickListener(v-> {
-            final Calendar c = Calendar.getInstance();
-            mHour = c.get(Calendar.HOUR_OF_DAY);
-            mMinute = c.get(Calendar.MINUTE);
             @SuppressLint("SetTextI18n")
             TimePickerDialog timePickerDialog=new TimePickerDialog(this, (view, hourOfDay, minute) -> {
-                endBtn.setText(hourOfDay+":"+minute);
-                endTime=hourOfDay+":"+minute;
-            },mHour,mMinute,false);
+                mEndHour=hourOfDay;
+                mEndMinute=minute;
+                        endTime=hourOfDay+":"+minute;
+                        endHour=hourOfDay;
+                        endMinute=minute;
+                        endBtn.setText(endHour+":"+endMinute);
+            },mEndHour,mEndMinute,true);
+            timePickerDialog.updateTime(mEndHour,mEndMinute);
             timePickerDialog.show();
         });
         colorBtn.setOnClickListener(v-> showColorPicker(colorBtn));
@@ -140,18 +145,6 @@ public class CreateEventActivity extends AppCompatActivity {
         });
         colorPicker.show();
     }
-
-    private void showTimePicker(Button Btn)
-    {
-        final Calendar c = Calendar.getInstance();
-        mHour = c.get(Calendar.HOUR_OF_DAY);
-        mMinute = c.get(Calendar.MINUTE);
-        @SuppressLint("SetTextI18n")
-        TimePickerDialog timePickerDialog = new TimePickerDialog(this,
-                (view, hourOfDay, minute) -> Btn.setText(hourOfDay + ":" + minute), mHour, mMinute, false);
-        timePickerDialog.show();
-    }
-
     private void initViews() {
         eventImage=findViewById(R.id.createNewEvent);
         eventTitle=findViewById(R.id.et_EventTitle);
@@ -166,32 +159,8 @@ public class CreateEventActivity extends AppCompatActivity {
         eventRecyclerView=findViewById(R.id.eventList);
         CreateEventRelative=findViewById(R.id.CreateEventRelative);
         createEventButton=findViewById(R.id.createEventButton);
-        SharedPreferences sharedPreferences=getSharedPreferences("MysharedPref",MODE_PRIVATE);
-        user_id=Integer.parseInt(sharedPreferences.getString("id","0"));
-        token=sharedPreferences.getString("token","");
-        userService= ApiClient.getClientTokn(token).create(UserService.class);
-        teamService=ApiClient.getClientTokn(token).create(TeamService.class);
         setLayout();
-        getAndSetInfo();
     }
-    private void getAndSetInfo() {
-        userService.callGetUserInformation(String.valueOf(user_id)).enqueue(new Callback<GetProfileModel>() {
-            @Override
-            public void onResponse(@NonNull Call<GetProfileModel> call, @NonNull Response<GetProfileModel> response) {
-                if(response.isSuccessful()){
-                    GetProfileModel getProfileModel=response.body();
-                    assert getProfileModel != null;
-                    team_id=Integer.parseInt(getProfileModel.body.getTeam_id());
-                    Log.d("value","Team id :-"+team_id);
-                 }
-            }
-            @Override
-            public void onFailure(@NonNull Call<GetProfileModel> call, @NonNull Throwable t) {
-                Toast.makeText(CreateEventActivity.this, "Failed :- "+t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
     private void setLayout(){
         if(viewShow==0){
             CreateEventRelative.setVisibility(View.VISIBLE);
@@ -204,15 +173,30 @@ public class CreateEventActivity extends AppCompatActivity {
 
     private void createTimeByTeam(String et_itle, String et_Description, int event_type, int defaultColor, String startTime, String endTime)
     {
-        getAndSetInfo();
-        SharedPreferences sharedPreferences=getSharedPreferences("MySharedPref",MODE_PRIVATE);
-        user_id=Integer.parseInt(sharedPreferences.getString("id","0"));
-        token=sharedPreferences.getString("token","");
-        getAndSetInfo();
         ProgressDialog progressDialog=new ProgressDialog(this);
         progressDialog.setMessage("Please wait....");
         progressDialog.show();
-        teamService.callbackCreateEvent(et_itle,user_id,team_id,startTime,endTime,et_Description,event_type,String.valueOf(defaultColor))
+        final int[] teamId = new int[1];
+        SharedPreferences sharedPreferences=getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        String UserId=sharedPreferences.getString("id","0");
+        token=sharedPreferences.getString("token","");
+        userService= ApiClient.getClientTokn(token).create(UserService.class);
+        teamService=ApiClient.getClientTokn(token).create(TeamService.class);
+        userService.callGetUserInformation(UserId).enqueue(new Callback<GetProfileModel>() {
+            @Override
+            public void onResponse(Call<GetProfileModel> call, Response<GetProfileModel> response) {
+                if(response.isSuccessful()){
+                    GetProfileModel getProfileModel=response.body();
+                    teamId[0] = Integer.parseInt(getProfileModel.getBody().getTeam_id());
+                }
+            }
+            @Override
+            public void onFailure(Call<GetProfileModel> call, Throwable t) {
+                Toast.makeText(CreateEventActivity.this, "Failed :- "+t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        user_id=Integer.parseInt(UserId);
+        teamService.callbackCreateEvent(et_itle,user_id, teamId[0],startTime,endTime,et_Description,event_type,String.valueOf(defaultColor))
                 .enqueue(new Callback<CreateTeamModel>() {
                     @Override
                     public void onResponse(@NonNull Call<CreateTeamModel> call, @NonNull Response<CreateTeamModel> response) {
